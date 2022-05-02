@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from "axios";
-import Card from "./Card";
-import { v4 as uuidv4 } from 'uuid';
+import CardPoke from "./Card";
+// import { v4 as uuidv4 } from 'uuid';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
 
 function Form() {
 
@@ -36,12 +38,11 @@ function Form() {
     return (
       <section>
         <form onSubmit={handleSubmit}>
-          <label htmlFor="name">Pokemon</label>
-          <input type="text" name="name"/>
-          <button type="submit">Search</button>
+          <TextField id="outlined-basic" label="Pokemon" variant="outlined" name="name"/>
+          <Button type="submit" variant="contained">Search</Button>
           {pokemons.length !== 0?
               pokemons.map(pokemon=>{
-                return <Card key={pokemon.name} poke={pokemon}/>
+                return <CardPoke key={pokemon.name} poke={pokemon}/>
               }): ""}
         </form>
       </section>

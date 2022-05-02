@@ -1,6 +1,10 @@
 import React from "react";
+import Card from '@mui/material/Card';
+import Typography from '@mui/material/Typography';
+import CardContent from '@mui/material/CardContent';
 
-function Card(props) { 
+
+function CardPoke(props) { 
   const poke = props.poke
   console.log(poke);
 
@@ -11,19 +15,21 @@ function Card(props) {
   //   })
 
     return (
-      <div>
-        <h3>{(poke.name).charAt(0).toUpperCase()+(poke.name).slice(1)}</h3>
-        <img src={poke.sprites.front_default} alt="Default form" />
-        <img src={poke.sprites.front_shiny} alt="Shiny form" />
-        <div> Types:
-          {
-           poke.types.map(type=>{return <p>{type.type.name}</p>}) 
-          }
-        </div>
-        <p>Weight: {poke.weight} kg</p>
-        <p>Height: {(poke.height*30.48).toFixed(2)} cmts</p>
-      </div>
+      <Card sx={{ maxWidth: 345 }}>
+        <CardContent>
+          <Typography>{(poke.name).charAt(0).toUpperCase()+(poke.name).slice(1)}</Typography>
+          <img src={poke.sprites.front_default} alt="Default form" />
+          <img src={poke.sprites.front_shiny} alt="Shiny form" />
+          <div> Types:
+            {
+            poke.types.map(type=>{return <p>{type.type.name}</p>}) 
+            }
+          </div>
+          <Typography>Weight: {poke.weight} kg</Typography>
+          <Typography>Height: {(poke.height*30.48).toFixed(2)} cmts</Typography>
+        </CardContent>
+      </Card>
     )
 }
 
-export default Card;
+export default CardPoke;
