@@ -1,0 +1,24 @@
+nav{
+    display: flex;
+    width: 200px;
+    justify-content: space-between;
+}
+.nav__element{
+    text-decoration: none;
+    font-weight: 400;
+    color: aliceblue;
+    font-size: 20px;
+    letter-spacing: 5px;
+    border-radius: 10%;
+    padding: 10px;
+    border: 0.5px solid aliceblue;
+}
+
+.nav__element:hover{
+    background-color: aliceblue;
+    color: rgb(175, 28, 28);
+}
+
+.nav__element:visited{
+    text-decoration: none;
+}

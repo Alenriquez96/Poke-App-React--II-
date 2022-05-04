@@ -1,9 +1,15 @@
 import React from "react";
 import Form from "./Form"
 
+
+
+
 function Main() {
     return (
-      <Form></Form>
+      <main>
+        <h1>Find your Pokemon!</h1>
+        <Form/>
+      </main>
     )
 }
 

@@ -5,11 +5,17 @@ import CardPoke from "./Card";
 import { v4 as uuidv4 } from 'uuid';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
+import ListaPokemon from "./ListaPokemon";
+// import { BrowserRouter } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
+
+
 
 function Form() {
 
   const [pokemons, setPokemons] = useState([]); 
-  const [input, setInput] = useState("")
+  const [onePokemon, setOnePoke] = useState([]);
+  const [input, setInput] = useState("");
 
   useEffect(
     () => {
@@ -18,7 +24,8 @@ function Form() {
           if (input !== '') {
             const resp = await axios.get(`https://pokeapi.co/api/v2/pokemon/${input}`);
             const data = await resp.data;
-            setPokemons([data]);
+            setPokemons([...pokemons,data]);
+            setOnePoke(data);
           }
         } catch (error) {
           console.log(error);
@@ -32,7 +39,7 @@ function Form() {
     [input] 
   );
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e) => { 
     e.preventDefault();
     setInput(e.target.name.value.toLowerCase());
     e.target.name.value=""
@@ -43,9 +50,11 @@ function Form() {
         <form className='formPoke' onSubmit={handleSubmit}>
           <TextField id="outlined-basic" label="Pokemon" variant="outlined" name="name"/>
           <Button type="submit" variant="contained">Search</Button>
-          {pokemons.length !== 0?
-              pokemons.map((pokemon,i)=><CardPoke  poke={pokemon}/>): ""}
         </form>
+        <Routes>
+          <Route element={onePokemon.length !== 0?<CardPoke key={uuidv4()} poke={onePokemon}/>:""} path="/"/>
+          <Route element={pokemons.length !== 0?pokemons.map((pokemon)=><ListaPokemon key={uuidv4()} poke={pokemon}/>): ""} path="/list"/>
+        </Routes>
       </section>
     )
   
