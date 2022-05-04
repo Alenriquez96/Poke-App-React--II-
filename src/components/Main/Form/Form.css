@@ -6,6 +6,6 @@
     align-items: center;
 }
 
-.formPoke>*{
+.formPoke *{
     margin: 10px;
 }
