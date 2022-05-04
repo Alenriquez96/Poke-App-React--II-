@@ -1,7 +1,6 @@
 import React from "react";
 import Form from "./Form"
-// import Card from "./Form/Card"
-// import ListaPokemon  from "./Form/ListaPokemon";
+
 
 
 

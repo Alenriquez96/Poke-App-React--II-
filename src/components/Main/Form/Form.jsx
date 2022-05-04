@@ -51,7 +51,6 @@ function Form() {
           <TextField id="outlined-basic" label="Pokemon" variant="outlined" name="name"/>
           <Button type="submit" variant="contained">Search</Button>
         </form>
-        {/* <h3>This is your current Pokemon</h3> */}
         <Routes>
           <Route element={onePokemon.length !== 0?<CardPoke key={uuidv4()} poke={onePokemon}/>:""} path="/"/>
           <Route element={pokemons.length !== 0?pokemons.map((pokemon)=><ListaPokemon key={uuidv4()} poke={pokemon}/>): ""} path="/list"/>
