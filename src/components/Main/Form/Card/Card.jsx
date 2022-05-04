@@ -6,7 +6,6 @@ import CardContent from '@mui/material/CardContent';
 
 function CardPoke(props) { 
   const poke = props.poke
-  console.log(poke);
 
   // const paintTypes = 
   //   poke.types.map(type=> {
