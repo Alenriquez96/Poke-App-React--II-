@@ -14,7 +14,7 @@ import { useDebounce } from "use-debounce";
 function Form() {
 
   const [pokemons, setPokemons] = useState([]); 
-  const [onePokemon, setOnePoke] = useState([]);
+  const [lastPokemon, setOnePoke] = useState([]);
   const [input, setInput] = useState("");
   const [debouncedInput] = useDebounce(input, 1500);
 
@@ -24,21 +24,17 @@ function Form() {
     () => {
       const getPokemons = async () => {
         try {
-          if (debouncedInput.length > 0) {
+          if (debouncedInput.length > 0 && pokemons.every(poke=>poke.name.toLowerCase() !==debouncedInput.toLowerCase())) {
             const resp = await axios.get(`https://pokeapi.co/api/v2/pokemon/${debouncedInput.toLowerCase()}`);
             const data = await resp.data; 
             setPokemons([...pokemons,data]);
             setOnePoke(data);
-            console.log(onePokemon);
+            console.log(lastPokemon);
           }
         } catch (error) {
           console.log(error);
           if(error.code==='ERR_BAD_REQUEST'){
-            setTimeout(function()
-            {
-                alert('Pokemon not found!');
-            }, 
-            1000);
+            setTimeout(function(){alert('Pokemon not found!')},1000);
           }
         }
       };
@@ -59,13 +55,14 @@ function Form() {
   }
 
 
+
     return (
       <section>
         <form className='formPoke' onSubmit={handleSubmit}>
           <TextField id="outlined-basic" label="Pokemon" variant="outlined" name="name" onChange={handleChange}/>
         </form>
         <Routes>
-          <Route element={onePokemon.length !== 0?<CardPoke key={uuidv4()} poke={onePokemon}/>:""} path="/"/>
+          <Route element={lastPokemon.length !== 0?<CardPoke key={uuidv4()} poke={lastPokemon}/>:""} path="/"/>
           <Route element={pokemons.length !== 0?pokemons.map((pokemon)=><ListaPokemon key={uuidv4()} poke={pokemon}/>): ""} path="/list"/>
         </Routes>
       </section>
