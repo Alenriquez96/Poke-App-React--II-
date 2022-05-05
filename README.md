@@ -2,7 +2,6 @@
 
 ### EJERCICIO: PokeApp con React Funcional (III)
 
-![img](../../assets/react/pokeapp/gameboy.jpg)
 
 - [pokeapi](https://pokeapi.co/)
 
