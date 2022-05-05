@@ -16,7 +16,9 @@ function CardPoke(props) {
     return (
       <Card sx={{ maxWidth: 345 }}>
         <CardContent>
-          <Typography>{(poke.name).charAt(0).toUpperCase()+(poke.name).slice(1)}</Typography>
+          <Typography>{
+          (poke.name).charAt(0).toUpperCase()+(poke.name).slice(1)
+          }</Typography>
           <img src={poke.sprites.front_default} alt="Default form" />
           <img src={poke.sprites.front_shiny} alt="Shiny form" />
           <div> Types:
