@@ -17,6 +17,8 @@ function Form() {
   const [onePokemon, setOnePoke] = useState([]);
   const [input, setInput] = useState("");
 
+
+  // eslint-disable-next-line
   useEffect(
     () => {
       const getPokemons = async () => {
@@ -36,6 +38,7 @@ function Form() {
       };
       getPokemons();
     },
+    // eslint-disable-next-line
     [input] 
   );
 
