@@ -21,6 +21,7 @@ function CardPoke(props) {
           }</Typography>
           <img src={poke.sprites.front_default} alt="Default form" />
           <img src={poke.sprites.front_shiny} alt="Shiny form" />
+          <Typography>Id:{poke.id}</Typography>
           <div> Types:
             {
             poke.types.map(type=>{return <p>{type.type.name}</p>}) 
