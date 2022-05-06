@@ -1,18 +1,22 @@
 import React,{useContext  } from "react";
 import Form from "./Form";
+import "./Main.css"
 import { Route, Routes } from 'react-router-dom';
 import NewPoke from "./New/New";
 import { v4 as uuidv4 } from 'uuid';
-import ListaPokemon from "./Form/ListaPokemon";
-import {pokeContext} from "../../context/pokeContext.js"
+import ListaPokemon from "./ListaPokemon";
+import {pokeContext} from "../../context/pokeContext.js";
+import { themeContext } from "../../context/themeContext";
 
   
 
 
 function Main() {
+  const {theme} = useContext(themeContext)
+  const darkMode = "main"+theme
   const {pokes} = useContext(pokeContext);
     return (
-      <main>
+      <main className={darkMode}>
         <h1>Find your Pokemon!</h1>
           <Routes>
             <Route element={<Form/>} path="/"/>

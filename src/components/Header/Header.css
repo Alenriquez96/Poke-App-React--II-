@@ -16,3 +16,14 @@ header{
     height: 70px;
     background-color: rgb(175, 28, 28);
 }
+
+.btnMode{
+    background-color: rgb(175, 28, 28);
+    border: none;
+    height: 100%;
+}
+
+.btnMode>img{
+    height: 95%;
+    width: 95%;
+}

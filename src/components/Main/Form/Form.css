@@ -13,4 +13,11 @@
 .MuiPaper-root{
     margin: 20px;
 }
+.card{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 
