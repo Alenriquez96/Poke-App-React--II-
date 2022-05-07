@@ -9,6 +9,7 @@ import Select from '@mui/material/Select';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import { Navigate  } from 'react-router-dom';
+import { useForm } from "react-hook-form";
 
 
 function New() {
@@ -16,30 +17,15 @@ function New() {
   const [notFull, setNotFull]= useState(undefined);
   const [allFilled, setAllFilled]=useState(false);
   const [redirect, setRedirect]=useState(false);
+  const { register, handleSubmit } = useForm();
 
-  const handleSubmit = (e) =>{
-    e.preventDefault();
-    const name = e.target.name.value;
-    const sprite = e.target.sprite.value;
-    const id = e.target.id.value;
-    const shinySprite = e.target.shinySprite.value;
-    const sprites = {
-      front_default: sprite,
-      front_shiny:shinySprite
-    }
-    const t1 = e.target.t1.value;
-    const t2 = e.target.t2.value;
-    const types = [{type:{name:t1}},{type:{name:t2}}]
-    const weight = e.target.weight.value;
-    const height = e.target.height.value;
+  const onSubmit = (pokeObject) =>{
+    console.log(pokeObject);
 
-    const pokeObj = {name,id,sprites,types,weight,height};
-
-    const objLength = Object.values(pokeObj)
+    const objLength = Object.keys(pokeObject);
     console.log(objLength);
-
-    if (objLength.every(e=>e!=="")) {
-      createNew(pokeObj);
+    if (objLength.every(e=>e!=="")) { 
+      createNew(pokeObject);
       setNotFull(false);
       setAllFilled(true);
       setRedirect(true);
@@ -57,13 +43,13 @@ function New() {
 
     return (
       <Box id="box" sx={{ display: 'flex', flexWrap: 'wrap' }} >
-        <form className="formNew" onSubmit={handleSubmit}>
-          <TextField type="text" label="Name" name="name" required minLenght="3"/>
-          <TextField label="Id" type="number" name="id" required/>
-          <TextField label="Sprite" type="text" name="sprite" required/>
-          <TextField label="Shiny Sprite" type="text" name="shinySprite"/>
+        <form className="formNew" onSubmit={handleSubmit(onSubmit)}>
+          <TextField {...register("name")} type="text" label="Name" name="name" required minLenght="3"/>
+          <TextField {...register("id")} label="Id" type="number" name="id" required/>
+          <TextField {...register("sprite")} label="Sprite" type="text" name="sprite" required/>
+          <TextField {...register("shinySprite")} label="Shiny Sprite" type="text" name="shinySprite"/>
           <label>Types:</label>
-          <Select label="First type" name="t1" required>
+          <Select {...register("type_1")} label="First type" name="t1" required>
             <MenuItem value="bug">Bug</MenuItem>
             <MenuItem value="dark">Dark</MenuItem>
             <MenuItem value="dragon">Dragon</MenuItem>
@@ -83,7 +69,7 @@ function New() {
             <MenuItem value="steel">Steel</MenuItem>
             <MenuItem value="water">Water</MenuItem>
           </Select>
-          <Select label="Second type" name="t2">
+          <Select {...register("type_2")} label="Second type" name="t2">
             <MenuItem value="bug">Bug</MenuItem>
             <MenuItem value="dark">Dark</MenuItem>
             <MenuItem value="dragon">Dragon</MenuItem>
@@ -103,8 +89,8 @@ function New() {
             <MenuItem value="steel">Steel</MenuItem>
             <MenuItem value="water">Water</MenuItem>
           </Select>
-          <TextField label="Weight" type="number" name="weight"/>
-          <TextField label="Height" type="number" name="height"/>
+          <TextField {...register("weight")} label="Weight" type="number" name="weight"/>
+          <TextField {...register("height")} label="Height" type="number" name="height"/>
           <Button type="submit" variant="outlined">Submit</Button>
           {notFull?<Stack sx={{ width: '100%' }} spacing={2}><Alert severity="error">Sorry! You must complete all the fields!</Alert></Stack>:""}
           {allFilled===true?<Stack sx={{ width: '100%' }} spacing={2}>

@@ -9,15 +9,15 @@ function ListaPokemon (props) {
     return (
       <Card sx={{ maxWidth: 345 }}>
         <CardContent>
-          <Typography>{(poke.name).charAt(0).toUpperCase()+(poke.name).slice(1)}</Typography>
-          <img src={poke.sprites.front_default} alt="Default form" />
-          <img src={poke.sprites.front_shiny} alt="Shiny form" />
+          <Typography variant="h5">{
+          (poke.name).charAt(0).toUpperCase()+(poke.name).slice(1)
+          }</Typography>
+          <img src={poke.sprite} alt="Default form" />
+          <img src={poke.shinySprite} alt="Shiny form" />
           <Typography>Id:{poke.id}</Typography>
-          <div> Types:
-            {
-            poke.types.map(type=>{return <p>{type.type.name}</p>}) 
-            }
-          </div>
+          <Typography>Types:</Typography>
+          <Typography>{poke.type_1}</Typography>
+          {poke.type_2?<Typography>{poke.type_2}</Typography>:""}
           <Typography>Weight: {poke.weight} kg</Typography>
           <Typography>Height: {(poke.height*30.48).toFixed(2)} cmts</Typography>
         </CardContent>

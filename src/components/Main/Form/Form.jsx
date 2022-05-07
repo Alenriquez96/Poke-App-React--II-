@@ -18,6 +18,7 @@ function Form() {
   const [input, setInput] = useState("");
   const [debouncedInput] = useDebounce(input, 1500);
   const [notFound, setNotFound]=useState(false);
+  // const [isRepeated, setRepeated]=useState(false);
 
 
 
@@ -28,10 +29,23 @@ function Form() {
           if (debouncedInput.length > 0 && pokes.every(poke=>poke.name !== debouncedInput)) {
             const resp = await axios.get(`https://pokeapi.co/api/v2/pokemon/${debouncedInput.toLowerCase()}`);
             const data = await resp.data; 
-            set([...pokes, data]);  
-            setLastPoke(data);
+            const type_1 = data.types[0].type.name || "";
+            const type_2 = data.types[1] ? data.types[1].type.name : "";  
+            const pokeParsed = {
+              name: data.name,
+              id: data.id,
+              sprite: data.sprites.versions['generation-v']['black-white'].animated.front_default || data.sprites.front_default,
+              shinySprite: data.sprites.versions['generation-v']['black-white'].animated.front_shiny || data.sprites.front_shiny,
+              type_1: type_1,
+              type_2: type_2,
+              height: data.weight,
+              weight: data.height
+            }
+            set([...pokes, pokeParsed]);  
+            setLastPoke(pokeParsed);
             setNotFound(false)
-          }
+            // setRepeated(false)
+          } 
         } catch (error) {
           console.log(error);
           if(error.code==='ERR_BAD_REQUEST'){
@@ -56,8 +70,11 @@ function Form() {
       <section className='card'>
         <h1>Find your Pokemon!</h1>
         <TextField id="outlined-basic" label="Pokemon" variant="outlined" name="name" onChange={handleChange} />
+        {/* {isRepeated?<Alert variant="outlined" severity="warning">
+        You already searched this Pokemon, try a new one!
+        </Alert>:""} */}
         {notFound?  <Stack sx={{ width: '100%' }} spacing={2}><Alert severity="error">Sorry! The Pokemon was not found!</Alert></Stack>:""}
-        {lastPokemon.length !== 0?<h3>This is your current pokemon</h3>:""}
+        {lastPokemon.length !== 0?<h3>This is your current Pokemon</h3>:""}
         {lastPokemon.length !== 0?<CardPoke key={uuidv4()} poke={lastPokemon}/>:""} 
       </section>
     )

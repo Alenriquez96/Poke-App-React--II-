@@ -9,20 +9,15 @@ import React, {useState} from "react";
   
 function App() {
   const [pokes, setPokes] = useState([]);
-  const [newPokemon, setNewPokemon] = useState([]);
   const [theme, setTheme] = useState("");
 
-  
+
   const createNew = (newPoke) =>{
-    setNewPokemon([...newPokemon,newPoke]);
+    setPokes([...pokes,newPoke])
   }
 
   const set = (pokemon) =>{
-    if (newPokemon.length ===0) { 
       setPokes(pokemon)
-    }else{
-      setPokes([...pokemon, ...newPokemon])  
-    }
   }
 
 
@@ -32,7 +27,6 @@ function App() {
     set,
     pokes,
     createNew,
-    newPokemon
   }
 
   const themeData = {
