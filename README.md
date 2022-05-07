@@ -1,4 +1,4 @@
-# [**VISIT APP**](https://dazzling-llama-c638cb.netlify.app)
+# [**GO TO THE APP**](https://dazzling-llama-c638cb.netlify.app)
 
 
 
