@@ -7,7 +7,8 @@ import TextField from '@mui/material/TextField';
 import { useDebounce } from "use-debounce";
 import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
-import {pokeContext} from "../../../context/pokeContext.js"
+import {pokeContext} from "../../../context/pokeContext.js";
+import {Link} from "react-router-dom";
 
 
 
@@ -26,7 +27,7 @@ function Form() {
     () => {
       const getPokemons = async () => {
         try {
-          if (debouncedInput.length > 0 && pokes.every(poke=>poke.name !== debouncedInput)) {
+          if (debouncedInput.length > 0 && pokes.every(poke=>poke.name !== debouncedInput.toLowerCase())) {
             const resp = await axios.get(`https://pokeapi.co/api/v2/pokemon/${debouncedInput.toLowerCase()}`);
             const data = await resp.data; 
             const type_1 = data.types[0].type.name || "";
@@ -70,12 +71,13 @@ function Form() {
       <section className='card'>
         <h1>Find your Pokemon!</h1>
         <TextField id="outlined-basic" label="Pokemon" variant="outlined" name="name" onChange={handleChange} />
-        {/* {isRepeated?<Alert variant="outlined" severity="warning">
+        {/* {isRepeated?<Stack><Alert variant="outlined" severity="warning">
         You already searched this Pokemon, try a new one!
-        </Alert>:""} */}
+        </Alert></Stack>:""} */}
         {notFound?  <Stack sx={{ width: '100%' }} spacing={2}><Alert severity="error">Sorry! The Pokemon was not found!</Alert></Stack>:""}
         {lastPokemon.length !== 0?<h3>This is your current Pokemon</h3>:""}
-        {lastPokemon.length !== 0?<CardPoke key={uuidv4()} poke={lastPokemon}/>:""} 
+        {lastPokemon.length !== 0?<Link to={`pokemon/${lastPokemon.id}`}><CardPoke key={uuidv4()} poke={lastPokemon}/></Link>:""} 
+        {lastPokemon.length !== 0?<h3>It was added to the PokeDex list! Go to the list section to check it out!</h3>:""}
       </section>
     )
 }

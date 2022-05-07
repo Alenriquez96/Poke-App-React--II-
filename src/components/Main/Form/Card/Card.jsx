@@ -13,9 +13,11 @@ function CardPoke(props) {
           <Typography variant="h5">{
           (poke.name).charAt(0).toUpperCase()+(poke.name).slice(1)
           }</Typography>
-          <img src={poke.sprite} alt="Default form" />
-          <img src={poke.shinySprite} alt="Shiny form" />
-          <Typography>Id:{poke.id}</Typography>
+          <div className="gameSprites">
+            <img src={poke.sprite} alt="Default form" />
+            <img src={poke.shinySprite} alt="Shiny form" />
+          </div>
+          <Typography>Id:#{poke.id}</Typography>
           <Typography>Types:</Typography>
           <Typography>{poke.type_1}</Typography>
           {poke.type_2?<Typography>{poke.type_2}</Typography>:""}
