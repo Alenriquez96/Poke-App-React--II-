@@ -4,7 +4,6 @@ import axios from "axios";
 import CardPoke from "./Card";
 import { v4 as uuidv4 } from 'uuid';
 import TextField from '@mui/material/TextField';
-
 import { useDebounce } from "use-debounce";
 import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
@@ -15,14 +14,9 @@ import {pokeContext} from "../../../context/pokeContext.js"
 function Form() {
 
   const {set, pokes} = useContext(pokeContext);
-  console.log(pokes);
-
-
-  const [pokemons, setPokemons] = useState([]);
-  const [lastPokemon, setOnePoke] = useState([]);
+  const [lastPokemon, setLastPoke] = useState([]);
   const [input, setInput] = useState("");
   const [debouncedInput] = useDebounce(input, 1500);
-
   const [notFound, setNotFound]=useState(false);
 
 
@@ -34,10 +28,9 @@ function Form() {
           if (debouncedInput.length > 0 && pokes.every(poke=>poke.name !== debouncedInput)) {
             const resp = await axios.get(`https://pokeapi.co/api/v2/pokemon/${debouncedInput.toLowerCase()}`);
             const data = await resp.data; 
-            setPokemons([...pokemons,data]);
-            setOnePoke(data);
+            set([...pokes, data]);  
+            setLastPoke(data);
             setNotFound(false)
-            set([...pokemons, data]);  
           }
         } catch (error) {
           console.log(error);
@@ -61,14 +54,13 @@ function Form() {
 
     return (
       <section className='card'>
-        <TextField id="outlined-basic" label="Pokemon" variant="outlined" name="name" onChange={handleChange}/>
+        <h1>Find your Pokemon!</h1>
+        <TextField id="outlined-basic" label="Pokemon" variant="outlined" name="name" onChange={handleChange} />
         {notFound?  <Stack sx={{ width: '100%' }} spacing={2}><Alert severity="error">Sorry! The Pokemon was not found!</Alert></Stack>:""}
+        {lastPokemon.length !== 0?<h3>This is your current pokemon</h3>:""}
         {lastPokemon.length !== 0?<CardPoke key={uuidv4()} poke={lastPokemon}/>:""} 
-          {/* <Route element={pokes.length !== 0?pokes.map((pokemon)=><ListaPokemon key={uuidv4()} poke={pokemon}/>): ""} path="/list"/> */}
-          {/* <Route element={<New/>} path="/new"/> */}
       </section>
     )
-  
 }
 
 export default Form;

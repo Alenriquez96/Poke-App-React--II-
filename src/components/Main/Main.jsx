@@ -17,7 +17,6 @@ function Main() {
   const {pokes} = useContext(pokeContext);
     return (
       <main className={darkMode}>
-        <h1>Find your Pokemon!</h1>
           <Routes>
             <Route element={<Form/>} path="/"/>
             <Route element={<NewPoke/>} path="/new"/>

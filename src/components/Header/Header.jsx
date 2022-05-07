@@ -67,6 +67,7 @@ function Header (){
         {/* <button className="btnMode" onClick={toggleTheme}>
           {theme === "-dark"?<img src={darkModeLogo} alt="modo noche" />:<img src={lightModeLogo} alt="modo dia" />}
         </button> */}
+        {/* La forma de arriba es sin usar mui */}
         <button className="btnMode" onClick={toggleTheme}>        
           {<MaterialUISwitch sx={{ m: 1 }} defaultChecked />}
         </button>

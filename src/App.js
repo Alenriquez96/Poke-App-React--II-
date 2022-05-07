@@ -12,7 +12,7 @@ function App() {
   const [newPokemon, setNewPokemon] = useState([]);
   const [theme, setTheme] = useState("");
 
-
+  
   const createNew = (newPoke) =>{
     setNewPokemon([...newPokemon,newPoke]);
   }

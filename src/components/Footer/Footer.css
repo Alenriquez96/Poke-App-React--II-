@@ -13,4 +13,5 @@ footer{
 footer>a:visited, footer>a{
     text-decoration: none;
     margin-left: 4px;
+    color: rgb(180, 180, 48);
 }

@@ -5,13 +5,7 @@ import CardContent from '@mui/material/CardContent';
 
 
 function CardPoke(props) { 
-  const poke = props.poke
-
-  // const paintTypes = 
-  //   poke.types.map(type=> {
-  //     console.log(type.type.name);
-  //       <p>{type.type.name}</p>
-  //   })
+  const poke = props.poke;
 
     return (
       <Card sx={{ maxWidth: 345 }}>
@@ -22,7 +16,7 @@ function CardPoke(props) {
           <img src={poke.sprites.front_default} alt="Default form" />
           <img src={poke.sprites.front_shiny} alt="Shiny form" />
           <Typography>Id:{poke.id}</Typography>
-          <div> Types:
+          <div> Types:  
             {
             poke.types.map(type=>{return <p>{type.type.name}</p>}) 
             }
