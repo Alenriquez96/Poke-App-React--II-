@@ -41,6 +41,7 @@ const Details = () => {
     }
     pokeDetails()
   }
+  // eslint-disable-next-line
     , [id]
   )
 
