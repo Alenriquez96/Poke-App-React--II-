@@ -23,6 +23,7 @@ Debounce:
 
 ### EJERCICIO: PokeApp. Reforzar enrutado, Context y formularios con React
 
+
 En esta etapa del ejercicio añadiremos un navbar que permita movernos entre rutas usando `<Link />`.
 
 ### Routing:
@@ -93,3 +94,4 @@ Como los pokemon no pueden tener el mismo tipo repetido DOS veces, **en la funci
 💗 Dadle amor a la maqueta 💗
 
 ÁNIMO! 🚀 🌠
+
