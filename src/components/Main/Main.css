@@ -9,3 +9,10 @@
 .main-dark:first-child {
     background-color: aliceblue;
 }
+a{
+    text-decoration: none;
+    transition: all .2s ease-in-out;
+}
+a:hover{
+    transform: scale(1.09);
+}

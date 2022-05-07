@@ -19,7 +19,7 @@ function Form() {
   const [input, setInput] = useState("");
   const [debouncedInput] = useDebounce(input, 1500);
   const [notFound, setNotFound]=useState(false);
-  // const [isRepeated, setRepeated]=useState(false);
+  const [isRepeated, setRepeated]=useState(false);
 
 
 
@@ -45,8 +45,11 @@ function Form() {
             set([...pokes, pokeParsed]);  
             setLastPoke(pokeParsed);
             setNotFound(false)
-            // setRepeated(false)
+            setRepeated(false)
           } 
+          // else{
+          //   setRepeated(true)
+          // }
         } catch (error) {
           console.log(error);
           if(error.code==='ERR_BAD_REQUEST'){
@@ -71,9 +74,9 @@ function Form() {
       <section className='card'>
         <h1>Find your Pokemon!</h1>
         <TextField id="outlined-basic" label="Pokemon" variant="outlined" name="name" onChange={handleChange} />
-        {/* {isRepeated?<Stack><Alert variant="outlined" severity="warning">
+        {isRepeated===true?<Alert variant="outlined" severity="warning">
         You already searched this Pokemon, try a new one!
-        </Alert></Stack>:""} */}
+        </Alert>:""}
         {notFound?  <Stack sx={{ width: '100%' }} spacing={2}><Alert severity="error">Sorry! The Pokemon was not found!</Alert></Stack>:""}
         {lastPokemon.length !== 0?<h3>This is your current Pokemon</h3>:""}
         {lastPokemon.length !== 0?<Link to={`pokemon/${lastPokemon.id}`}><CardPoke key={uuidv4()} poke={lastPokemon}/></Link>:""} 
