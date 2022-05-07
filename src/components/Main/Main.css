@@ -1,0 +1,18 @@
+.main-dark{
+    color: aliceblue;
+    background-color: rgb(38, 38, 44);
+    min-height: 100vh;
+}
+.main{
+    min-height: 100vh;
+}
+.main-dark:first-child {
+    background-color: aliceblue;
+}
+a{
+    text-decoration: none;
+    transition: all .2s ease-in-out;
+}
+a:hover{
+    transform: scale(1.09);
+}

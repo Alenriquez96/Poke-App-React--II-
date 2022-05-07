@@ -8,6 +8,7 @@ function Nav () {
     <nav>
       <Link to="/" className="nav__element">HOME</Link>
       <Link to="/list" className="nav__element">LIST</Link>
+      <Link to="/new" className="nav__element">CREATE</Link>
     </nav>
     )
 

@@ -1,0 +1,14 @@
+#mainImg{
+    height: 300px;
+    width: 300px;
+}
+.games{
+    display: flex;
+    justify-content: space-around;
+}
+
+.gameSprites{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

@@ -5,27 +5,22 @@ import CardContent from '@mui/material/CardContent';
 
 
 function CardPoke(props) { 
-  const poke = props.poke
-
-  // const paintTypes = 
-  //   poke.types.map(type=> {
-  //     console.log(type.type.name);
-  //       <p>{type.type.name}</p>
-  //   })
+  const poke = props.poke;
 
     return (
       <Card sx={{ maxWidth: 345 }}>
         <CardContent>
-          <Typography>{
+          <Typography variant="h5">{
           (poke.name).charAt(0).toUpperCase()+(poke.name).slice(1)
           }</Typography>
-          <img src={poke.sprites.front_default} alt="Default form" />
-          <img src={poke.sprites.front_shiny} alt="Shiny form" />
-          <div> Types:
-            {
-            poke.types.map(type=>{return <p>{type.type.name}</p>}) 
-            }
+          <div className="gameSprites">
+            <img src={poke.sprite} alt="Default form" />
+            <img src={poke.shinySprite} alt="Shiny form" />
           </div>
+          <Typography>Id:#{poke.id}</Typography>
+          <Typography>Types:</Typography>
+          <Typography>{poke.type_1}</Typography>
+          {poke.type_2?<Typography>{poke.type_2}</Typography>:""}
           <Typography>Weight: {poke.weight} kg</Typography>
           <Typography>Height: {(poke.height*30.48).toFixed(2)} cmts</Typography>
         </CardContent>

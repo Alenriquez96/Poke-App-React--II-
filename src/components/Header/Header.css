@@ -1,6 +1,6 @@
 .imgHeader{
     height: 50px;
-    width: 100px;
+    width: 150px;
 }
 
 img{
@@ -15,4 +15,15 @@ header{
     width: 100%;
     height: 70px;
     background-color: rgb(175, 28, 28);
+}
+
+.btnMode{
+    background-color: rgb(175, 28, 28);
+    border: none;
+    height: 100%;
+}
+
+.btnMode>img{
+    height: 95%;
+    width: 95%;
 }
