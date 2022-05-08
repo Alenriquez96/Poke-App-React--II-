@@ -36,7 +36,6 @@ function New() {
 
   if (redirect) {
     setTimeout(function(){
-      console.log("Entra en el redirect y el setTimeOut");
       return <Navigate to="/list"/>;
     },2000);
   }
@@ -94,7 +93,7 @@ function New() {
           <Button type="submit" variant="outlined">Submit</Button>
           {notFull?<Stack sx={{ width: '100%' }} spacing={2}><Alert severity="error">Sorry! You must complete all the fields!</Alert></Stack>:""}
           {allFilled===true?<Stack sx={{ width: '100%' }} spacing={2}>
-          <Alert onClose={() => {}}>Pokemon created! Redirecting to the list...</Alert></Stack>:""}
+          <Alert onClose={() => {}}>Pokemon created! Go to the list to check it out...</Alert></Stack>:""}
         </form>
       </Box>
     )
