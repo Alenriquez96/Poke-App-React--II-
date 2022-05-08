@@ -5,18 +5,19 @@ import Card from '@mui/material/Card';
 import Typography from '@mui/material/Typography';
 import CardContent from '@mui/material/CardContent';
 import "./Details.css";
-// import Table from '@mui/material/Table';
-// import TableBody from '@mui/material/TableBody';
-// import TableCell from '@mui/material/TableCell';
-// import TableContainer from '@mui/material/TableContainer';
-// import TableHead from '@mui/material/TableHead';
-// import TableRow from '@mui/material/TableRow';
-// import Paper from '@mui/material/Paper';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
 
 
 const Details = () => {
-  const [pokeDetailed, setFetch] = useState({});
+  const [pokeDetailed, setPokeDetailed] = useState("");
   const { id } = useParams();
+  console.log(pokeDetailed);
 
   useEffect(() => {
     async function pokeDetails() {
@@ -34,24 +35,32 @@ const Details = () => {
         type_2: type_2,
         height: data.weight,
         weight: data.height,
-        // statsBase:{one:data.stats[0].base_stat,two:data.stats[1].base_stat,three:data.stats[2].base_stat,four:data.stats[3].base_stat,five:data.stats[4].base_stat,six:data.stats[5].base_stat}
+        statsBase:{
+          one:data.stats[0].base_stat,
+          two:data.stats[1].base_stat || "",
+          three:data.stats[2].base_stat || "",
+          four:data.stats[3].base_stat || "",
+          five:data.stats[4].base_stat || "",
+          six:data.stats[5].base_stat || "" 
+        }
       } 
-      setFetch(()=>pokeParsed);
-      console.log(pokeDetailed);
+      setPokeDetailed(pokeParsed);
     }
     pokeDetails()
   }
   // eslint-disable-next-line
     , [id]
   )
+  if (!pokeDetailed) return;
 
-  // function createData(name, Hp, Attack, Defense, Special_attack,Special_defense,Speed){
-  //   return { name, Hp, Attack, Defense, Special_attack,Special_defense,Speed };
-  // }
+  function createData(name, Hp, Attack, Defense, Special_attack,Special_defense,Speed){
+    return { name, Hp, Attack, Defense, Special_attack,Special_defense,Speed };
+  }
 
-  // const rows = [
-  //   createData('Base stats', pokeDetailed.statsBase.one, pokeDetailed.statsBase.two, pokeDetailed.statsBase.three, pokeDetailed.statsBase.four,pokeDetailed.statsBase.five,pokeDetailed.statsBase.six)
-  // ];
+  const rows = [
+    createData('Base stats', pokeDetailed.statsBase.one, pokeDetailed.statsBase.two, pokeDetailed.statsBase.three, pokeDetailed.statsBase.four,pokeDetailed.statsBase.five,pokeDetailed.statsBase.six)
+  ];
+
 
   return (
     <Card sx={{ maxWidth: 345 }}>
@@ -72,7 +81,7 @@ const Details = () => {
       <Typography>Weight: {pokeDetailed.weight} kg</Typography>
       <Typography>Height: {(pokeDetailed.height*30.48).toFixed(2)} cmts</Typography>
       <Typography variant="h5">Pokemon Stats:</Typography>
-      {/* <TableContainer component={Paper}>
+      <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
@@ -104,7 +113,7 @@ const Details = () => {
           ))}
         </TableBody>
       </Table>
-    </TableContainer> */}
+    </TableContainer>
 
     </CardContent>
   </Card>
