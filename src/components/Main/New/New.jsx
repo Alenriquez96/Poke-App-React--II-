@@ -8,7 +8,7 @@ import TextField from '@mui/material/TextField';
 import Select from '@mui/material/Select';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
-import { Navigate  } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
 
@@ -18,6 +18,7 @@ function New() {
   const [allFilled, setAllFilled]=useState(false);
   const [redirect, setRedirect]=useState(false);
   const { register, handleSubmit } = useForm();
+  let navigate = useNavigate();
 
   const onSubmit = (pokeObject) =>{
     console.log(pokeObject);
@@ -35,11 +36,12 @@ function New() {
   }
 
   if (redirect) {
-    setTimeout(function(){
-      console.log("Entra en el redirect y el setTimeOut");
-      return <Navigate to="/list"/>;
-    },2000);
+    setTimeout(function () {
+      return navigate("/list", { replace: true });
+    }, 2000);
   }
+
+  
 
     return (
       <Box id="box" sx={{ display: 'flex', flexWrap: 'wrap' }} >
